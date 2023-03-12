@@ -92,9 +92,11 @@
                 <th>nama</th>
                 <th>Jenis Kelamin</th>
                 <th>Program Studi</th>
-                <th>Skill</th>
                 <th>Domisili</th>
                 <th>email</th>
+                <th>Skill</th>
+                <th>Skor</th>
+                <th>Predikat</th>
 
 
             </tr>
@@ -106,18 +108,44 @@
                 $jenis_kelamin = $_POST["jk"];
                 $domisili = $_POST["tempat"];
                 $prodi = $_POST["prodi"];
-                $skills = $_POST["skill"];
+                $skill = $_POST["skill"];
+                $skor = 0;
             ?>
             <tr>
-                <td><?= $nim; ?></td>
-                <td><?= $nama; ?></td>
-                <td><?= $jenis_kelamin; ?></td>
+            <td><?= $nim;?></td>
+                <td><?= $nama;?></td>
+                <td><?= $jenis_kelamin;?></td>
                 <td><?= $prodi;?></td>
-                <td><?php foreach($skills as $skill){echo $skill ." ";}?></td>
                 <td><?= $domisili;?></td>
-                <td><?= $email; ?></td>
-                
-
+                <td><?= $email;?></td>
+                <td>
+                <?php 
+                foreach($skill as $skill){
+                    foreach ($skills as $key => $value) {
+                        if ($skill == $key) {
+                            $skor += $value;
+                        }
+                    }
+                    echo $skill . "<br>";
+                    }?>
+                </td>
+                <td><?= 
+                $skor;
+                ?></td>
+                <td><?php 
+            
+                    if($skor == 0){
+                        echo  "Tidak Memadai";
+                        }elseif($skor > 0 && $skor <= 40){
+                            echo  "Kurang";
+                        }elseif($skor > 40 && $skor <= 60){
+                            echo  "Cukup";
+                        }elseif($skor > 60 && $skor <= 100){
+                            echo  "Baik";
+                        }elseif($skor > 100) {
+                            echo  "Sangat Baik";
+                        }
+                ;?></td>
             </tr>
             <?php }?>
         </table>
